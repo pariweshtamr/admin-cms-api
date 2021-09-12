@@ -30,7 +30,7 @@ const send = async infoObj => {
     }
 }
 
-const emailProcessor = ({ fname, email, pin, subject, text, html }) => {
+const emailProcessor = ({ email, subject, text, html }) => {
     let info = {
             from: `"EShop 👻" <${process.env.EMAIL_USER}>`, // sender address
             to: email, // list of receivers
@@ -64,7 +64,6 @@ Kind Regards, <br/><br/>
 --some company information--
 `, // html body
 }
-
     emailProcessor(obj)
 }
 
@@ -75,21 +74,17 @@ export const sendEmailVerificationCOnfirmation = (emailObj) => {
 
     const obj = {
         ...emailObj,
-subject: "Email confirmation required",
+subject: "Email verification successful",
 text: `Hi ${fname}, Your email has been verified. You can now log in!`, // plain text body
 html: `
 Hello ${fname},
 <br/>
-
 Your email has been verified. You can now log in!
-
 <br/><br/>
 Thank you<br/><br/>
-
 Kind Regards, <br/><br/>
 --some company information--
 `, // html body
 }
-
     emailProcessor(obj)
 }
