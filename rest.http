@@ -18,8 +18,13 @@ Content-Type: application/json
     "password": "1234567"
 }
 
-// server-side validation
+##### Email APIs
 
-//send email confirmation and validate email
+### verify admin email
+PATCH  http://localhost:8000/api/v1/user/email-verification
+Content-Type: application/json
 
-//account has been activated
+{
+    "pin": "974941",
+    "email": "ssds@hh.com"
+}
