@@ -3,6 +3,8 @@ const Router = express.Router()
 import {createUser} from '../models/user-model/User.model.js'
 import { createAdminUserValidation } from '../middlewares/formValidation.middleware.js'
 import {hashPassword} from '../helpers/bcrypt.helper.js'
+import {createUniqueEmailConfirmation} from '../models/session/Session.model.js'
+import {emailProcessor} from '../helpers/email.helper.js'
 
 Router.all("/", (req, res, next) => {
     console.log('from user router')
@@ -10,22 +12,32 @@ Router.all("/", (req, res, next) => {
 })
 
 Router.post ("/", createAdminUserValidation, async (req, res) => {
-    console.log(req.body)
+    // console.log(req.body)
     try {
-        // TODO
-        
         // encrypt password
         const hashPass = hashPassword(req.body.password)
+        // console.log(hashPass)
         if(hashPass){
         
         req.body.password=hashPass
         console.log(hashPass)
 
-        const result = await createUser(req.body)
+        const {_id, fname, email} = await createUser(req.body)
 
-        if(result?._id){
-            // TO DO
-            // Create unique activation link and email the link to user email
+        if(_id){
+            // TODO
+            // Create unique activation link
+            const {pin} = await createUniqueEmailConfirmation(email)
+
+            if(pin) {
+                const forSendingEmail = {
+                    fname,
+                    email,
+                    pin,
+                }    
+                emailProcessor(forSendingEmail)
+            }
+
             return res.json({
                 state: 'success',
                 message: 'New user has been created successfully! We hav sent an email confirmation to your email, please check and follow the instructions to verify and activate your account'
