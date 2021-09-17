@@ -39,14 +39,14 @@ Router.post ("/", createAdminUserValidation, async (req, res) => {
             }
 
             return res.json({
-                state: 'success',
+                status: 'success',
                 message: 'New user has been created successfully! We hav sent an email confirmation to your email, please check and follow the instructions to verify and activate your account'
             })
         }
         }
 
         res.json({
-            state: 'error',
+            status: 'error',
             message: 'Unable to create new user'
         })
 
@@ -57,7 +57,7 @@ Router.post ("/", createAdminUserValidation, async (req, res) => {
             msg="This email has already been used by another user."
         }
         res.json({
-            state: 'error',
+            status: 'error',
             message: 'Unable to create new user'
         })
     }

@@ -9,8 +9,8 @@ export const createAdminUserValidation = (req, res, next) => {
 const schema = Joi.object({
     fname: shortstr,
     lname: shortstr,
-    gender: Joi.string().max(6),
-    dob: Joi.date(),
+    gender: Joi.string().max(6).allow(""),
+    dob: Joi.date().allow(null).allow(""),
     email: email,
     phone: Joi.string().max(15),
     address: Joi.string().max(100),

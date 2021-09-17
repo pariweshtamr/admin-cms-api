@@ -3,6 +3,7 @@ dotenv.config()
 import express from 'express'
 const app = express()
 import helmet from 'helmet'
+import cors from 'cors'
 import morgan from 'morgan'
 
 const PORT = process.env.PORT || 8000
@@ -13,6 +14,7 @@ mongoClient()
 
 //MIDDLEWARES
 app.use(helmet())
+app.use(cors())
 app.use(morgan('tiny'))
 app.use(express.urlencoded())
 app.use(express.json())
