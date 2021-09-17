@@ -10,7 +10,9 @@ const CategorySchema = mongoose.Schema({
     slug:{
         type: String,
         required: true,
-        default: ""
+        default: "",
+        unique: true,
+        index: 1
     },
     parentCat: {
         type: mongoose.Schema.Types.ObjectId,
@@ -23,4 +25,4 @@ const CategorySchema = mongoose.Schema({
 
 )
 
-export default CategorySchema
+export default mongoose.model("Category", CategorySchema)
