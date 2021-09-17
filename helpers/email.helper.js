@@ -45,7 +45,7 @@ const emailProcessor = ({ email, subject, text, html }) => {
 export const sendEmailVerificationLink = (emailObj) => {
     const {fname, pin, email} = emailObj
 
-    const link = `http://localhost:3000/email-varification?pin=${pin}&email=${email}`
+    const link = `http://localhost:3000/email-verification?pin=${pin}&email=${email}`
     const obj = {
         ...emailObj,
 subject: "Email confirmation required",
@@ -55,7 +55,7 @@ Hello there,
 <br/>
 
 Please follow the link below to confirm your email. <br/>
-${link}
+<a href="${link}" target="_blank"> ${link} </a>
 
 <br/><br/>
 Thank you<br/><br/>
