@@ -28,3 +28,12 @@ Content-Type: application/json
     "pin": "974941",
     "email": "ssds@hh.com"
 }
+
+
+
+# Catalog router
+
+### get catalog
+GET http://localhost:8000/api/v1/catalog
+
+
