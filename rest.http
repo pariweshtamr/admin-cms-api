@@ -31,11 +31,10 @@ Content-Type: application/json
 
 
 
-# Catalog router
+#### Catalog router
 
-### get catalog
-GET http://localhost:8000/api/v1/catalog
-
+### get all or single categories
+GET http://localhost:8000/api/v1/catalog/
 
 
 ### Post new category
@@ -43,6 +42,19 @@ POST http://localhost:8000/api/v1/catalog
 Content-Type: application/json
 
 {
-    "name": "Electronics",
+    "name": "Furniture",
+    "parentCat": null
+}
+
+### Delete Category
+DELETE http://localhost:8000/api/v1/catalog/
+
+### Update category
+PATCH http://localhost:8000/api/v1/catalog/
+Content-Type: application/json
+
+{
+    "_id": "61452cee93f28fc24050fe0d",
+    "name": "Houseware",
     "parentCat": null
 }

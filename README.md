@@ -19,5 +19,7 @@ All user api endpoint will be followed by `${rootUrl}/api/v1/user`
 All user api endpoint will be followed by `${rootUrl}/api/v1/catalog`
 | # | API | METHOD | DESCRIPTION |
 | - | --- | ------ | -------------------------- |
-| 1. | `/` | GET | Get all catalogs |
-| 2. | `/` | POST | Create new catalog in database |
+| 1. | `/:_id?` | GET | Get single category if `_id` is provided, else return all categories |
+| 2. | `/` | POST | Create new category in database |
+| 2. | `/` | PATCH | Update existing category in database |
+| 2. | `/:_id?` | DELETE | delete category from database |

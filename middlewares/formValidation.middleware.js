@@ -1,7 +1,10 @@
 import Joi from 'joi'
 
-const shortstr = Joi.string().max(20).alphanum().required()
+const shortstr = Joi.string().max(30).alphanum().required()
+const plainShortStr = Joi.string().max(20).required()
+const id = Joi.string().max(30)
 const email = Joi.string().max(50).email({ minDomainSegments: 2, tlds: { allow: ['com', 'net', 'au'] } }).required()
+const shortStrNull = Joi.string().max(30).allow(null).allow('')
 
 export const createAdminUserValidation = (req, res, next) => {
 
@@ -46,4 +49,52 @@ export const adminnEmailVerificationValidation = (req, res, next) => {
         }
         next()
     
+}
+
+export const newCategoryValidation = (req, res, next) => {
+    try {
+        const schema = Joi.object({
+            name: plainShortStr,
+            parentCat: shortStrNull
+        })
+        const value = schema.validate(req.body)
+
+        if(value.error){
+            return res.json({
+                status: 'error',
+                message: value.error.message,
+            })
+        }
+        next()
+    } catch (error) {
+        res.json({
+            status: 'error',
+            message: value.error.message,
+        })
+    }
+}
+
+
+export const updateCategoryValidation = (req, res, next) => {
+    try {
+        const schema = Joi.object({
+            _id: id,
+            name: plainShortStr,
+            parentCat: shortStrNull
+        })
+        const value = schema.validate(req.body)
+
+        if(value.error){
+            return res.json({
+                status: 'error',
+                message: value.error.message,
+            })
+        }
+        next()
+    } catch (error) {
+        res.json({
+            status: 'error',
+            message: value.error.message,
+        })
+    }
 }
