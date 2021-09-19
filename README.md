@@ -16,7 +16,7 @@ All user api endpoint will be followed by `${rootUrl}/api/v1/user`
 
 ### Catalog API end point
 
-All user api endpoint will be followed by `${rootUrl}/api/v1/catalog`
+All user api endpoint will be followed by `${rootUrl}/api/v1/category`
 | # | API | METHOD | DESCRIPTION |
 | - | --- | ------ | -------------------------- |
 | 1. | `/:_id?` | GET | Get single category if `_id` is provided, else return all categories |

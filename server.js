@@ -25,7 +25,7 @@ import categoryRouter from './routers/categoryRouter.js'
 
 // Use ROUTERS
 app.use("/api/v1/user", userRouter)
-app.use("/api/v1/catalog", categoryRouter)
+app.use("/api/v1/category", categoryRouter)
 
 app.use("/", (req, res)=>{
     res.json({ message: 'hello world' })

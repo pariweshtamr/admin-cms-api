@@ -34,11 +34,11 @@ Content-Type: application/json
 #### Catalog router
 
 ### get all or single categories
-GET http://localhost:8000/api/v1/catalog/
+GET http://localhost:8000/api/v1/category/
 
 
 ### Post new category
-POST http://localhost:8000/api/v1/catalog
+POST http://localhost:8000/api/v1/category
 Content-Type: application/json
 
 {
@@ -47,10 +47,10 @@ Content-Type: application/json
 }
 
 ### Delete Category
-DELETE http://localhost:8000/api/v1/catalog/
+DELETE http://localhost:8000/api/v1/category/
 
 ### Update category
-PATCH http://localhost:8000/api/v1/catalog/
+PATCH http://localhost:8000/api/v1/category/
 Content-Type: application/json
 
 {
