@@ -12,7 +12,7 @@ Content-Type: application/json
     "lname": "Tamrakar",
     "gender": "Male",
     "dob": "01/01/1995",
-    "email": "ssds@hh.com",
+    "email": "a@a.com",
     "phone": "0462718276",
     "address": "Sydney, NSW",
     "password": "1234567"
@@ -29,9 +29,19 @@ Content-Type: application/json
     "email": "ssds@hh.com"
 }
 
+### Login user
+POST  http://localhost:8000/api/v1/user/login
+Content-Type: application/json
+
+{
+    "email": "a@a.com",
+    "password": "1234567"
+}
 
 
-#### Catalog router
+
+
+################# Category router
 
 ### get all or single categories
 GET http://localhost:8000/api/v1/category/

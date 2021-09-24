@@ -1,26 +1,25 @@
 import mongoose from "mongoose";
 
-const SessionSchema = mongoose.Schema({
-    pin: {
-        type: String,
-        required: true,
-    },
-    email: {
-        type: String,
-        required: true,
-        max: 50,
-    },
+const SessionSchema = mongoose.Schema(
+  {
     type: {
-        type: String,
-        default: "emailValidation",
-        max:50,
+      type: String,
+      required: true,
+      default: "accessJWT",
+      max: 20,
     },
-},
-{
-    timestamps: true,    
-}
-)
+    token: {
+      type: String,
+      required: true,
+      default: null,
+      max: 100,
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
 
-const session = mongoose.model("Session", SessionSchema)
+const session = mongoose.model("Session", SessionSchema);
 
-export default session
+export default session;

@@ -6,7 +6,7 @@ export const hashPassword = plainPass => {
     return bcrypt.hashSync(plainPass, saltRounds)
 }
 
-// //COMPARE PASSWORD
-// export const comparePassword = (plainPass, hashPassFromDB) => {
-//     return bcrypt.compareSync(plainPass, hashPassFromDB)
-// }
+//COMPARE PASSWORD
+export const comparePassword = (plainPass, hashPassFromDB) => {
+    return bcrypt.compareSync(plainPass, hashPassFromDB)
+}
