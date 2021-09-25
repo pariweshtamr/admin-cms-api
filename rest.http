@@ -68,3 +68,11 @@ Content-Type: application/json
     "name": "Houseware",
     "parentCat": null
 }
+
+
+
+
+################# TOKEN ROUTERS
+### Get new access token
+GET http://localhost:8000/api/v1/token/
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MzI1Mjc0MzksImV4cCI6MTYzNTExOTQzOX0.R8Gizi6lZN1_iQr58Idt_BHjQhCF8O99SVwi3r0sluU
