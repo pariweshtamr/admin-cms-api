@@ -4,7 +4,9 @@ import {
   createUser,
   verifyEmail,
   getUserByEmail,
+  removeRefreshJWT,
 } from "../models/user-model/User.model.js";
+import { removeSession } from "../models/session/Session.model.js";
 import {
   createAdminUserValidation,
   adminnEmailVerificationValidation,
@@ -20,6 +22,7 @@ import {
   sendEmailVerificationLink,
   sendEmailVerificationCOnfirmation,
 } from "../helpers/email.helper.js";
+import { isAdminUser } from "../middlewares/auth.middleware.js";
 import { getJWTs } from "../helpers/jwt.helper.js";
 
 Router.all("/", (req, res, next) => {
@@ -27,7 +30,7 @@ Router.all("/", (req, res, next) => {
   next();
 });
 
-Router.post("/", createAdminUserValidation, async (req, res) => {
+Router.post("/", isAdminUser, createAdminUserValidation, async (req, res) => {
   // console.log(req.body)
   try {
     // encrypt password
@@ -148,6 +151,27 @@ Router.post("/login", loginUserFormValidation, async (req, res) => {
     res.status(401).json({
       status: "Error",
       message: "Unauthorized",
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      status: "error",
+      message: "Error, unable to Login, Please try again later.",
+    });
+  }
+});
+
+// user logout
+Router.post("/logout", async (req, res) => {
+  try {
+    const { accessJWT, refreshJWT } = req.body;
+
+    accessJWT && (await removeSession(accessJWT));
+    refreshJWT && (await removeRefreshJWT(refreshJWT));
+
+    res.json({
+      status: "success",
+      message: "Logging out...",
     });
   } catch (error) {
     console.log(error);

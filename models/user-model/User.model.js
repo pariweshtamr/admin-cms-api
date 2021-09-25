@@ -34,3 +34,7 @@ export const getUserByEmail = (email) => {
 export const getUserByEmailAndRefreshToken = (filter) => {
   return UserSchema.findOne(filter);
 };
+
+export const removeRefreshJWT = (refreshJWT) => {
+  return UserSchema.findOneAndUpdate({ refreshJWT }, { refreshJWT: "" });
+};

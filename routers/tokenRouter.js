@@ -15,6 +15,8 @@ Router.get("/", async (req, res) => {
     //1. check if the token is valid
     const { email } = verifyRefreshJWT(authorization);
 
+    console.log(email);
+
     //2. get the user info
     if (email) {
       // get user id from db by email
@@ -23,9 +25,10 @@ Router.get("/", async (req, res) => {
         refreshJWT: authorization,
       };
       const user = await getUserByEmailAndRefreshToken(filter);
+      console.log(user);
       if (user?._id) {
         const accessJWT = await createAccessJWT({ _id: user._id, email });
-
+        console.log(accessJWT);
         return res.json({
           accessJWT,
         });
@@ -36,6 +39,7 @@ Router.get("/", async (req, res) => {
       message: "Unauthenticated",
     });
   } catch (error) {
+    console.log(error);
     res.status(401).json({
       status: "error",
       message: "Unauthenticated",

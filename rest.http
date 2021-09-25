@@ -38,6 +38,15 @@ Content-Type: application/json
     "password": "1234567"
 }
 
+### Logout user
+POST  http://localhost:8000/api/v1/user/logout
+Content-Type: application/json
+
+{
+    "accessJWT": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAYS5jb20iLCJpYXQiOjE2MzI1NzA4MTIsImV4cCI6MTYzMjU3MTcxMn0.Gv06KKkBbp95EXR4DRe7ClmFsWxEfW1Slxoeki_pxCo",
+    "refreshJWT": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAYS5jb20iLCJpYXQiOjE2MzI1NzA4MTIsImV4cCI6MTYzNTE2MjgxMn0.457n-ucn23zn_kvjKuIuh-RX4JIxrtvYCHsOPw1TdFI"
+}
+
 
 
 
@@ -50,6 +59,7 @@ GET http://localhost:8000/api/v1/category/
 ### Post new category
 POST http://localhost:8000/api/v1/category
 Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAYS5jb20iLCJpYXQiOjE2MzI1Mzg0NDMsImV4cCI6MTYzMjUzOTM0M30.T4DIpmf-wiyVRZMKcgbxoBIvBb8GTtbnW8y7bfTZmZg
 
 {
     "name": "Furniture",
@@ -62,6 +72,7 @@ DELETE http://localhost:8000/api/v1/category/
 ### Update category
 PATCH http://localhost:8000/api/v1/category/
 Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAYS5jb20iLCJpYXQiOjE2MzI1Mzg0NDMsImV4cCI6MTYzMjUzOTM0M30.T4DIpmf-wiyVRZMKcgbxoBIvBb8GTtbnW8y7bfTZmZg
 
 {
     "_id": "61452cee93f28fc24050fe0d",

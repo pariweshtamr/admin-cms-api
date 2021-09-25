@@ -37,15 +37,18 @@ export const getJWTs = async ({ _id, email }) => {
     return false;
   }
   const accessJWT = await createAccessJWT({ email });
-  const refreshJWT = await createRefreshJWT({ _id, email });
+  const refreshJWT = await createRefreshJWT(_id, email);
   return { accessJWT, refreshJWT };
 };
 
 export const verifyRefreshJWT = (refreshJWT) => {
+  return jwt.verify(refreshJWT, process.env.JWT_REFRESH_SECRET);
+};
+
+export const verifyAccessJWT = (accessJWT) => {
   try {
-    return jwt.verify(refreshJWT, process.env.JWT_REFRESH_SECRET);
+    return jwt.verify(accessJWT, process.env.JWT_ACCESS_SECRET);
   } catch (error) {
-    console.log(error);
-    return error.message;
+    return false;
   }
 };
