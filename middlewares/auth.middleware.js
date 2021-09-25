@@ -18,7 +18,6 @@ export const isAdminUser = async (req, res, next) => {
       const session = decoded?.email
         ? await getSession({ token: authorization })
         : null;
-      console.log(decoded, session);
       if (session?._id) {
         req.userId = session.userId;
 
