@@ -6,9 +6,19 @@ export const isAdminUser = async (req, res, next) => {
     const { authorization } = req.headers;
     if (authorization) {
       //validate the accessJWT
-      const { email } = verifyAccessJWT(authorization);
-      const session = email ? await getSession({ token: authorization }) : null;
+      const decoded = verifyAccessJWT(authorization);
 
+      if (decoded === "jwt expired") {
+        return res.status(403).json({
+          status: "error",
+          message: "jwt expired",
+        });
+      }
+
+      const session = decoded?.email
+        ? await getSession({ token: authorization })
+        : null;
+      console.log(decoded, session);
       if (session?._id) {
         req.userId = session.userId;
 
@@ -16,9 +26,9 @@ export const isAdminUser = async (req, res, next) => {
         return;
       }
     }
-    return res.status(403).json({
-      status: "error",
-      message: "Unauthorized",
+    return res.status(401).json({
+      status: 401,
+      message: "Unauthenticated. Please log in again.",
     });
   } catch (error) {
     console.log(error);

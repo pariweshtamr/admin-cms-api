@@ -7,7 +7,7 @@ import { setRefreshJWT } from "../models/user-model/User.model.js";
 
 export const createAccessJWT = async ({ _id, email }) => {
   const token = jwt.sign({ email }, process.env.JWT_ACCESS_SECRET, {
-    expiresIn: "15m",
+    expiresIn: "1m",
   });
 
   //store in db
@@ -49,6 +49,6 @@ export const verifyAccessJWT = (accessJWT) => {
   try {
     return jwt.verify(accessJWT, process.env.JWT_ACCESS_SECRET);
   } catch (error) {
-    return false;
+    return error.message;
   }
 };

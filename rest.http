@@ -59,7 +59,7 @@ GET http://localhost:8000/api/v1/category/
 ### Post new category
 POST http://localhost:8000/api/v1/category
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAYS5jb20iLCJpYXQiOjE2MzI1Mzg0NDMsImV4cCI6MTYzMjUzOTM0M30.T4DIpmf-wiyVRZMKcgbxoBIvBb8GTtbnW8y7bfTZmZg
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAYS5jb20iLCJpYXQiOjE2MzI1NzMwOTMsImV4cCI6MTYzMjU3Mzk5M30.JGNnAH1bknecI8loODCdsvro_VgroT-Z5Sw7I3f0lt4
 
 {
     "name": "Furniture",
@@ -84,6 +84,6 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAYS5jb20iLCJp
 
 
 ################# TOKEN ROUTERS
-### Get new access token
+### Get new access/refresh token
 GET http://localhost:8000/api/v1/token/
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MzI1Mjc0MzksImV4cCI6MTYzNTExOTQzOX0.R8Gizi6lZN1_iQr58Idt_BHjQhCF8O99SVwi3r0sluU
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAYS5jb20iLCJpYXQiOjE2MzI2MDkxODAsImV4cCI6MTYzNTIwMTE4MH0.w7_EWdCFOOn-F2rZrVpDKZEKDUyOefSwWt9LFKAgLKY

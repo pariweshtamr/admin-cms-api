@@ -165,7 +165,6 @@ Router.post("/login", loginUserFormValidation, async (req, res) => {
 Router.post("/logout", async (req, res) => {
   try {
     const { accessJWT, refreshJWT } = req.body;
-
     accessJWT && (await removeSession(accessJWT));
     refreshJWT && (await removeRefreshJWT(refreshJWT));
 
