@@ -5,6 +5,7 @@ import {
   verifyEmail,
   getUserByEmail,
   removeRefreshJWT,
+  updateUserProfile,
 } from "../models/user-model/User.model.js";
 import { removeSession } from "../models/session/Session.model.js";
 import {
@@ -30,6 +31,15 @@ Router.all("/", (req, res, next) => {
   next();
 });
 
+Router.get("/", isAdminUser, (req, res) => {
+  res.json({
+    status: "success",
+    message: "User Profile",
+    user: req.user,
+  });
+});
+
+//create new user
 Router.post("/", isAdminUser, createAdminUserValidation, async (req, res) => {
   // console.log(req.body)
   try {
@@ -77,6 +87,36 @@ Router.post("/", isAdminUser, createAdminUserValidation, async (req, res) => {
     res.json({
       status: "error",
       message: "Unable to create new user",
+    });
+  }
+});
+
+//update user
+Router.patch("/", isAdminUser, async (req, res) => {
+  try {
+    const { _id } = req.user;
+    console.log(_id, req.body);
+
+    if (_id) {
+      const result = await updateUserProfile(_id, req.body);
+
+      if (result?._id) {
+        return res.json({
+          status: "success",
+          message: "User profile has been updated successfully",
+        });
+      }
+    }
+
+    return res.json({
+      status: "error",
+      message: "Unable to uppdate user information. Please try again later.",
+    });
+  } catch (error) {
+    console.log(error);
+    return res.json({
+      status: "error",
+      message: "Unable to uppdate user information. Please try again later.",
     });
   }
 });
@@ -131,7 +171,7 @@ Router.post("/login", loginUserFormValidation, async (req, res) => {
 
     const user = await getUserByEmail(email);
 
-    if (user?._id) {
+    if (user?._id && user?.role === "admin") {
       //check if password is valid
       const isPasswordValid = comparePassword(password, user.password);
       if (isPasswordValid) {

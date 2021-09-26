@@ -1,5 +1,6 @@
 import { verifyAccessJWT } from "../helpers/jwt.helper.js";
 import { getSession } from "../models/session/Session.model.js";
+import { getUserById } from "../models/user-model/User.model.js";
 
 export const isAdminUser = async (req, res, next) => {
   try {
@@ -14,15 +15,22 @@ export const isAdminUser = async (req, res, next) => {
           message: "jwt expired",
         });
       }
-
       const session = decoded?.email
         ? await getSession({ token: authorization })
         : null;
-      if (session?._id) {
-        req.userId = session.userId;
+      console.log(session);
 
-        next();
-        return;
+      if (session?._id) {
+        const user = await getUserById(session.userId);
+        console.log(user);
+        if (user?.role === "admin") {
+          req.user = user;
+          req.user.password = undefined;
+          req.user.refreshJWT = undefined;
+
+          next();
+          return;
+        }
       }
     }
     return res.status(401).json({

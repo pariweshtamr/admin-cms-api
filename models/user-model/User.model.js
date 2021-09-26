@@ -9,6 +9,15 @@ export const createUser = (newUser) => {
   }
 };
 
+export const updateUserProfile = (_id, updateUser) => {
+  try {
+    const result = UserSchema.findByIdAndUpdate(_id, updateUser, { new: true });
+    return result;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
 export const verifyEmail = (email) => {
   try {
     return UserSchema.findOneAndUpdate(
@@ -25,6 +34,10 @@ export const setRefreshJWT = (_id, token) => {
   return UserSchema.findByIdAndUpdate(_id, {
     refreshJWT: token,
   });
+};
+
+export const getUserById = (id) => {
+  return UserSchema.findById(id);
 };
 
 export const getUserByEmail = (email) => {
