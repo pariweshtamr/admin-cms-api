@@ -47,8 +47,15 @@ Content-Type: application/json
     "refreshJWT": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAYS5jb20iLCJpYXQiOjE2MzI1NzA4MTIsImV4cCI6MTYzNTE2MjgxMn0.457n-ucn23zn_kvjKuIuh-RX4JIxrtvYCHsOPw1TdFI"
 }
 
+### admin update password
+POST http://localhost:8000/api/v1/user/password-update
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAYS5jb20iLCJpYXQiOjE2MzMwNTAzMjMsImV4cCI6MTYzMzA1MTIyM30.jcZomfiKPeLPtyplSYBDf3GFvWpik81McldtFZG5Ieo
 
-
+{
+    "currentPassword":"C.ronaldo7",
+    "password":"1A!aa111"
+}
 
 ################# Category router
 
@@ -87,3 +94,6 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAYS5jb20iLCJp
 ### Get new access/refresh token
 GET http://localhost:8000/api/v1/token/
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAYS5jb20iLCJpYXQiOjE2MzI2MDkxODAsImV4cCI6MTYzNTIwMTE4MH0.w7_EWdCFOOn-F2rZrVpDKZEKDUyOefSwWt9LFKAgLKY
+
+
+
