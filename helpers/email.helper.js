@@ -106,3 +106,26 @@ Kind Regards, <br/><br/>
   }
   emailProcessor(obj)
 }
+
+export const sendPasswordResetOtp = (emailObj) => {
+  const { fname, otp } = emailObj
+
+  const obj = {
+    ...emailObj,
+    subject: 'Reset password OTP',
+    text: `Hi ${fname}, please use the following OTP to reset your password. ${otp}. The OTP will expire in 15 minutes.`, // plain text body
+    html: `
+Hello ${fname},
+<br/>
+
+Please use the following OTP to reset your password. ${otp}. The OTP will expire in 15 minutes. <br/>
+
+<br/><br/>
+Thank you<br/><br/>
+
+Kind Regards, <br/><br/>
+--some company information--
+`, // html body
+  }
+  emailProcessor(obj)
+}

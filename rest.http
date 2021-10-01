@@ -57,6 +57,15 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAYS5jb20iLCJp
     "password":"1A!aa111"
 }
 
+### reset new password
+POST http://localhost:8000/api/v1/user/reset-password
+Content-Type: application/json
+
+{
+    "otp": 255545, 
+    "newPassword":"1A!aa111"
+}
+
 ################# Category router
 
 ### get all or single categories
@@ -95,5 +104,12 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAYS5jb20iLCJp
 GET http://localhost:8000/api/v1/token/
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAYS5jb20iLCJpYXQiOjE2MzI2MDkxODAsImV4cCI6MTYzNTIwMTE4MH0.w7_EWdCFOOn-F2rZrVpDKZEKDUyOefSwWt9LFKAgLKY
 
+### user forgot password OPT request
+POST  http://localhost:8000/api/v1/token/request-otp
+Content-Type: application/json
+
+{
+    "email": "a@a.com"
+}
 
 

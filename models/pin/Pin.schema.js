@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose'
 
 const PinSchema = mongoose.Schema(
   {
@@ -13,15 +13,15 @@ const PinSchema = mongoose.Schema(
     },
     type: {
       type: String,
-      default: "emailValidation",
+      default: 'emailValidation',
       max: 50,
     },
   },
   {
     timestamps: true,
-  }
-);
+  },
+)
 
-const pin = mongoose.model("Pin", PinSchema);
+const pin = mongoose.model('Pin', PinSchema)
 
-export default pin;
+export default pin
