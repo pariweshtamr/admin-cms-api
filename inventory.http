@@ -1,0 +1,20 @@
+# PRODUCT API LIST
+
+
+// status, title, price, salesPrice, salesStartDate, salesEndDate, brnad, qty, tthumbnail, images, description, Categories, slug
+
+### ADD NEW PRODUCT
+POST http://localhost:8000/api/v1/inventory
+Content-Type: application/json
+
+{
+    "title": "Nike Mercurial Superfly V FG CR7",
+    "price": 320,
+    "salesPrice": 0,
+    "salesStartDate": null,
+    "salesEndDate": null,
+    "brand": "Nike",
+    "quantity": "100",
+    "description": "asfadf dffajdfa shdads usdakshd"
+
+}
