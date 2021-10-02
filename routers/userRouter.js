@@ -6,6 +6,7 @@ import {
   getUserByEmail,
   removeRefreshJWT,
   updateUserProfile,
+  updateUserProfileByEmail,
 } from '../models/user-model/User.model.js'
 import { removeSession } from '../models/session/Session.model.js'
 import {
@@ -13,6 +14,7 @@ import {
   adminnEmailVerificationValidation,
   loginUserFormValidation,
   passwordUpdateFormValidation,
+  forgotPasswordResetFormValidation,
 } from '../middlewares/formValidation.middleware.js'
 import { hashPassword, comparePassword } from '../helpers/bcrypt.helper.js'
 import {
@@ -29,7 +31,6 @@ import { isAdminUser } from '../middlewares/auth.middleware.js'
 import { getJWTs } from '../helpers/jwt.helper.js'
 
 Router.all('/', (req, res, next) => {
-  console.log('from user router')
   next()
 })
 
@@ -43,19 +44,15 @@ Router.get('/', isAdminUser, (req, res) => {
 
 //create new user
 Router.post('/', isAdminUser, createAdminUserValidation, async (req, res) => {
-  // console.log(req.body)
   try {
     // encrypt password
     const hashPass = hashPassword(req.body.password)
-    // console.log(hashPass)
     if (hashPass) {
       req.body.password = hashPass
-      console.log(hashPass)
 
       const { _id, fname, email } = await createUser(req.body)
 
       if (_id) {
-        // TODO
         // Create unique activation link
         const { pin } = await createUniqueEmailConfirmation(email)
 
@@ -223,6 +220,7 @@ Router.post('/logout', async (req, res) => {
   }
 })
 
+//update password when logged in
 Router.post(
   '/password-update',
   isAdminUser,
@@ -246,6 +244,55 @@ Router.post(
             })
             // send email notification
             sendPasswordUpdateNotification({ fname, email })
+            return
+          }
+        }
+      }
+
+      res.json({
+        status: 'error',
+        message: 'Unable to update password. Please try again later.',
+      })
+    } catch (error) {
+      res.json({
+        status: 'error',
+        message: 'Error, unable to process your request.',
+      })
+    }
+  },
+)
+
+//reset forgotten password when logged out
+Router.post(
+  '/reset-password',
+  forgotPasswordResetFormValidation,
+  async (req, res) => {
+    try {
+      const { otp, password, email } = req.body
+
+      // validate if otp and email exists in db
+      const filter = { pin: otp, email }
+      const hasOtp = await findAdminEmailVerification(filter)
+
+      if (hasOtp?._id) {
+        // encrypt new pw coming from frontend
+        const hashedPass = hashPassword(password)
+        if (hashedPass) {
+          //update user table with the new pw
+          const user = await updateUserProfileByEmail(email, {
+            password: hashedPass,
+          })
+          if (user._id) {
+            res.json({
+              status: 'success',
+              message: 'Password updated successfully',
+            })
+            // send email notification
+            sendPasswordUpdateNotification({ email })
+
+            /// don't forget to delete the otp set from db
+            deleteInfo(filter)
+
             return
           }
         }

@@ -88,7 +88,7 @@ Kind Regards, <br/><br/>
 //send the email confirming password update
 
 export const sendPasswordUpdateNotification = (emailObj) => {
-  const { fname } = emailObj
+  const { fname = 'there' } = emailObj
 
   const obj = {
     ...emailObj,

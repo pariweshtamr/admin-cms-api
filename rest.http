@@ -62,8 +62,9 @@ POST http://localhost:8000/api/v1/user/reset-password
 Content-Type: application/json
 
 {
-    "otp": 255545, 
-    "newPassword":"1A!aa111"
+    "otp": "822430",
+    "email": "a@a.com" ,
+    "password":"1aA!111"
 }
 
 ################# Category router
