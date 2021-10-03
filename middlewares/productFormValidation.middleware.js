@@ -24,7 +24,6 @@ export const newProductValidation = (req, res, next) => {
       description: longstr.required(),
       category: Joi.array(),
     })
-    console.log(req.body)
     const values = schema.validate(req.body)
 
     if (values.error) {

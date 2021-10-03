@@ -37,7 +37,6 @@ Router.post('/', newProductValidation, async (req, res) => {
     console.log(req.body)
     const slug = slugify(req.body.title, { lower: true })
     const product = await addProduct({ ...req.body, slug })
-    console.log(product)
 
     product?._id
       ? res.json({
