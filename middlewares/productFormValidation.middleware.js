@@ -22,7 +22,7 @@ export const newProductValidation = (req, res, next) => {
       brand: shortStrNull,
       qty: qty.required(),
       description: longstr.required(),
-      category: Joi.array(),
+      category: Joi.string(),
     })
     const values = schema.validate(req.body)
 
