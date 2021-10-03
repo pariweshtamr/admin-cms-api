@@ -2,14 +2,25 @@ import express from 'express'
 const Router = express.Router()
 import slugify from 'slugify'
 
-import { addProduct } from '../models/inventory/Inventory.model.js'
+import {
+  addProduct,
+  getAllProducts,
+  getAProductBySlug,
+} from '../models/product/Product.model.js'
 import { newProductValidation } from '../middlewares/productFormValidation.middleware.js'
 
 Router.get('/:slug?', async (req, res) => {
   try {
+    const { slug } = req.params
+
+    const products = slug
+      ? await getAProductBySlug(slug)
+      : await getAllProducts()
+
     res.json({
       status: 'success',
-      message: 'TODO, fetch all or single product',
+      message: 'Product List',
+      products,
     })
   } catch (error) {
     console.log(error)
@@ -38,6 +49,8 @@ Router.post('/', newProductValidation, async (req, res) => {
           message: 'Unable to add the product. Please try again later.',
         })
   } catch (error) {
+    console.log(error)
+
     if (error.message.includes('E11000 duplicate key error collection')) {
       return res.json({
         status: 'error',

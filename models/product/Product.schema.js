@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 
-const InventorySchema = mongoose.Schema(
+const ProductSchema = mongoose.Schema(
   {
     status: {
       type: Boolean,
@@ -75,4 +75,4 @@ const InventorySchema = mongoose.Schema(
   },
 )
 
-export default mongoose.model('Inventory', InventorySchema)
+export default mongoose.model('Product', ProductSchema)

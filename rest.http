@@ -71,15 +71,16 @@ Content-Type: application/json
 
 ### get all or single categories
 GET http://localhost:8000/api/v1/category/
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAYS5jb20iLCJpYXQiOjE2MzMyMDg2NTksImV4cCI6MTYzMzIwOTU1OX0.Qz5HaexTrmZn2b2h8hgykHzNIAncCeqnjjhS3COCybE
 
 
 ### Post new category
 POST http://localhost:8000/api/v1/category
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAYS5jb20iLCJpYXQiOjE2MzI1NzMwOTMsImV4cCI6MTYzMjU3Mzk5M30.JGNnAH1bknecI8loODCdsvro_VgroT-Z5Sw7I3f0lt4
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAYS5jb20iLCJpYXQiOjE2MzMyMDg2NTksImV4cCI6MTYzMzIwOTU1OX0.Qz5HaexTrmZn2b2h8hgykHzNIAncCeqnjjhS3COCybE
 
 {
-    "name": "Furniture",
+    "name": "Sports",
     "parentCat": null
 }
 

@@ -1,14 +1,16 @@
 # PRODUCT API LIST
 
+### FETCH SINGLE OR ALL PRODUCTS 
+GET http://localhost:8000/api/v1/product/
 
 // status, title, price, salesPrice, salesStartDate, salesEndDate, brnad, qty, tthumbnail, images, description, Categories, slug
 
 ### ADD NEW PRODUCT
-POST http://localhost:8000/api/v1/inventory
+POST http://localhost:8000/api/v1/product
 Content-Type: application/json
 
 {
-    "title": "Nike Mercurial Superfly V FG CR7",
+    "title": "Nike Mercurial Superfly IV AG",
     "price": 320,
     "salesPrice": 0,
     "salesStartDate": null,
