@@ -34,7 +34,7 @@ export const isAdminUser = async (req, res, next) => {
       }
     }
     return res.status(401).json({
-      status: 401,
+      status: 'error',
       message: 'Unauthenticated. Please log in again.',
     })
   } catch (error) {

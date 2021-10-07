@@ -2,6 +2,8 @@ import dotenv from 'dotenv'
 dotenv.config()
 import express from 'express'
 const app = express()
+
+import path from 'path'
 import helmet from 'helmet'
 import cors from 'cors'
 import morgan from 'morgan'
@@ -27,11 +29,15 @@ import categoryRouter from './routers/categoryRouter.js'
 import tokenRouter from './routers/tokenRouter.js'
 import productRouter from './routers/productRouter.js'
 
+// Server static content
+const __dirname = path.resolve()
+app.use(express.static(path.join(__dirname, 'public')))
+
 // Use ROUTERS
 app.use('/api/v1/user', userRouter)
 app.use('/api/v1/category', isAdminUser, categoryRouter)
 app.use('/api/v1/token', tokenRouter)
-app.use('/api/v1/product', productRouter)
+app.use('/api/v1/product', isAdminUser, productRouter)
 
 app.use('/', (req, res) => {
   res.json({ message: 'hello world' })

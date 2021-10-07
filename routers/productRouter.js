@@ -7,8 +7,10 @@ import {
   addProduct,
   getAllProducts,
   getAProductBySlug,
+  deleteAProduct,
 } from '../models/product/Product.model.js'
 import { newProductValidation } from '../middlewares/productFormValidation.middleware.js'
+import { isAdminUser } from '../middlewares/auth.middleware.js'
 
 Router.get('/:slug?', async (req, res) => {
   try {
@@ -66,9 +68,7 @@ Router.post(
 
       const images = []
 
-      const basePath = `${req.protocol}://${req.get(
-        'host',
-      )}/public/images/products/`
+      const basePath = `${req.protocol}://${req.get('host')}/images/products/`
       files.map((file) => {
         const imgFullPath = basePath + file.filename
         images.push(imgFullPath)
@@ -104,11 +104,21 @@ Router.post(
 )
 
 // DELETE A PRODUCT
-Router.delete('/', async (req, res) => {
+Router.delete('/:_id', async (req, res) => {
   try {
+    const { _id } = req.params
+    if (_id) {
+      const result = await deleteAProduct(_id)
+      if (result?._id) {
+        return res.json({
+          status: 'Success',
+          message: 'The product has been deleted successfully!',
+        })
+      }
+    }
     res.json({
-      status: 'success',
-      message: 'TODO, delete a product',
+      status: 'Error',
+      message: 'Invalid request. Product not found.',
     })
   } catch (error) {
     console.log(error)
