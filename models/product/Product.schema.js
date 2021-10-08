@@ -25,9 +25,9 @@ const ProductSchema = mongoose.Schema(
       type: Number,
       required: true,
       default: 0,
-      max: 500,
+      max: 5000,
     },
-    salePrice: {
+    salesPrice: {
       type: Number,
       required: true,
       default: 0,
@@ -46,7 +46,7 @@ const ProductSchema = mongoose.Schema(
       default: '',
       maxLength: 50,
     },
-    quantity: {
+    qty: {
       type: Number,
       required: true,
       default: 0,

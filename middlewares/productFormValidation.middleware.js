@@ -22,7 +22,7 @@ export const newProductValidation = (req, res, next) => {
       brand: shortStrNull,
       qty: qty.required(),
       description: longstr.required(),
-      category: Joi.string(),
+      categories: Joi.string(),
     })
     const values = schema.validate(req.body)
 
@@ -32,6 +32,8 @@ export const newProductValidation = (req, res, next) => {
         message: values.error.message,
       })
     }
+
+    req.body.categories = req.body.categories.split(',')
     next()
   } catch (error) {
     console.log(error)
