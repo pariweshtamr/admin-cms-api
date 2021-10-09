@@ -25,19 +25,19 @@ const ProductSchema = mongoose.Schema(
       type: Number,
       required: true,
       default: 0,
-      max: 5000,
+      max: 10000,
     },
     salesPrice: {
       type: Number,
       required: true,
       default: 0,
-      max: 500,
+      max: 10000,
     },
-    saleStartDate: {
+    salesStartDate: {
       type: Date,
       default: null,
     },
-    saleEndDate: {
+    salesEndDate: {
       type: Date,
       default: null,
     },

@@ -18,11 +18,9 @@ export const isAdminUser = async (req, res, next) => {
       const session = decoded?.email
         ? await getSession({ token: authorization })
         : null
-      console.log(session)
 
       if (session?._id) {
         const user = await getUserById(session.userId)
-        console.log(user)
         if (user?.role === 'admin') {
           req.user = user
           // req.user.password = undefined;

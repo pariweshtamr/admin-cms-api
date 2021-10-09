@@ -8,9 +8,12 @@ import {
   getAllProducts,
   getAProductBySlug,
   deleteAProduct,
+  updateProduct,
 } from '../models/product/Product.model.js'
-import { newProductValidation } from '../middlewares/productFormValidation.middleware.js'
-import { isAdminUser } from '../middlewares/auth.middleware.js'
+import {
+  newProductValidation,
+  updateProductValidation,
+} from '../middlewares/productFormValidation.middleware.js'
 
 Router.get('/:slug?', async (req, res) => {
   try {
@@ -130,19 +133,51 @@ Router.delete('/:_id', async (req, res) => {
 })
 
 // UPDATE A PRODUCT
-Router.patch('/', async (req, res) => {
-  try {
-    res.json({
-      status: 'success',
-      message: 'TODO, delete a product',
-    })
-  } catch (error) {
-    console.log(error)
-    res.status(500).json({
-      status: 'error',
-      message: 'Internal server error',
-    })
-  }
-})
+Router.put(
+  '/',
+  upload.array('images', 5),
+  updateProductValidation,
+  async (req, res) => {
+    try {
+      const { existingImages, imgToDelete, _id, ...product } = req.body
+      //FILE ZONE
+
+      const files = req.files
+
+      let images = []
+
+      const basePath = `${req.protocol}://${req.get('host')}/images/products/`
+
+      /// remove the image that is to be deleted
+      images = existingImages.filter((source) => !imgToDelete.includes(source))
+
+      console.log(req.body)
+      //new image coming
+      files.map((file) => {
+        const imgFullPath = basePath + file.filename
+        images.push(imgFullPath)
+      })
+
+      const result = await updateProduct(_id, { ...product, images })
+
+      result?._id
+        ? res.json({
+            status: 'success',
+            message: 'Product has been successfully updated',
+          })
+        : res.json({
+            status: 'error',
+            message: 'Unable to update the product. Please try again later.',
+          })
+    } catch (error) {
+      console.log(error)
+
+      res.status(500).json({
+        status: 'error',
+        message: 'Internal server error',
+      })
+    }
+  },
+)
 
 export default Router

@@ -25,6 +25,6 @@ export const deleteAProduct = (_id) => {
 }
 
 // update existing
-export const updateAProduct = ({ _id, ...rest }) => {
-  return ProductSchema.findByIdAndUpdate(_id, rest, { new: true })
+export const updateProduct = (_id, product) => {
+  return ProductSchema.findByIdAndUpdate(_id, product)
 }
