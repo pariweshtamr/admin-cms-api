@@ -114,3 +114,26 @@ Content-Type: application/json
 }
 
 
+
+
+
+
+
+# ************************************* PAYMENT APIS *******************************************
+
+### get payment methods
+GET http://localhost:8000/api/v1/payment-option
+
+
+
+### add new payment options
+POST http://localhost:8000/api/v1/payment-option
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAYS5jb20iLCJpYXQiOjE2MzM4Mjk4MjYsImV4cCI6MTYzMzgzMDcyNn0.yV6xJsD-EPn_OpelP80XPYqNKL7AbvKO14Ce-_3sBPY
+Content-Type: application/json
+
+{
+    "status": false,
+    "name": "Bank Transfer",
+    "info": "Please remit the fund to the following account \n Acc: 4637281, BSB: 846638"
+}
+
