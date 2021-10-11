@@ -4,6 +4,8 @@ const Router = express.Router()
 import {
   storePaymentOption,
   getAllPaymentOptions,
+  removePaymentOption,
+  updatePaymentOption,
 } from '../models/payment-options/PaymentOptions.model.js'
 import { newPaymentOptionValidation } from '../middlewares/paymentValidation.middleware.js'
 
@@ -34,6 +36,58 @@ Router.post('/', newPaymentOptionValidation, async (req, res) => {
       })
     }
     return res.json({
+      status: 'error',
+      message: 'Unable to process your request. Please try again later',
+    })
+  } catch (error) {
+    return res.json({
+      status: 'error',
+      message: 'Unable to process your request. Please try again later',
+    })
+  }
+})
+
+Router.patch('/', async (req, res) => {
+  try {
+    const { _id, status } = req.body
+
+    if (_id) {
+      const result = await updatePaymentOption({ _id, status })
+
+      if (result?._id) {
+        return res.json({
+          status: 'success',
+          message: 'The payment option has been successfully updated',
+          options: result,
+        })
+      }
+    }
+
+    res.json({
+      status: 'error',
+      message: 'Unable to process your request. Please try again later',
+    })
+  } catch (error) {
+    return res.json({
+      status: 'error',
+      message: 'Unable to process your request. Please try again later',
+    })
+  }
+})
+
+Router.delete('/:_id', async (req, res) => {
+  try {
+    const { _id } = req.params
+    const result = await removePaymentOption(_id)
+
+    if (result?._id) {
+      return res.json({
+        status: 'success',
+        message: 'The payment option has been successfully deleted',
+        options: result,
+      })
+    }
+    res.json({
       status: 'error',
       message: 'Unable to process your request. Please try again later',
     })

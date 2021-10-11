@@ -15,3 +15,7 @@ export const getAPaymentOption = (_id) => {
 export const removePaymentOption = (_id) => {
   return PaymentOptionsSchema.findByIdAndRemove(_id)
 }
+
+export const updatePaymentOption = ({ _id, status }) => {
+  return PaymentOptionsSchema.findByIdAndUpdate(_id, { status })
+}
