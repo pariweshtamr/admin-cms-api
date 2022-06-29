@@ -5,6 +5,7 @@ import { getUserById } from '../models/user-model/User.model.js'
 export const isAdminUser = async (req, res, next) => {
   try {
     const { authorization } = req.headers
+    console.log(authorization, 'auth')
     if (authorization) {
       //validate the accessJWT
       const decoded = verifyAccessJWT(authorization)

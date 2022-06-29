@@ -1,54 +1,53 @@
-import jwt from "jsonwebtoken";
-import { storeSession } from "../models/session/Session.model.js";
-import { setRefreshJWT } from "../models/user-model/User.model.js";
+import jwt from 'jsonwebtoken'
+import { storeSession } from '../models/session/Session.model.js'
+import { setRefreshJWT } from '../models/user-model/User.model.js'
 
 // JWT_ACCESS_SECRET
 // JWT_REFRESH_SECRET
 
 export const createAccessJWT = async ({ _id, email }) => {
   const token = jwt.sign({ email }, process.env.JWT_ACCESS_SECRET, {
-    expiresIn: "15m",
-  });
-  console.log(_id, email, "from helper");
+    expiresIn: '15m',
+  })
 
   //store in db
 
-  const result = await storeSession({ type: "accessJWT", token, userId: _id });
+  const result = await storeSession({ type: 'accessJWT', token, userId: _id })
   if (result?._id) {
-    return token;
+    return token
   }
-  return;
-};
+  return
+}
 
 const createRefreshJWT = async (_id, email) => {
   const token = jwt.sign({ email }, process.env.JWT_REFRESH_SECRET, {
-    expiresIn: "30d",
-  });
+    expiresIn: '30d',
+  })
   //store in db
-  const result = await setRefreshJWT(_id, token);
+  const result = await setRefreshJWT(_id, token)
   if (result?._id) {
-    return token;
+    return token
   }
-  return;
-};
+  return
+}
 
 export const getJWTs = async ({ _id, email }) => {
   if (!_id && !email) {
-    return false;
+    return false
   }
-  const accessJWT = await createAccessJWT({ _id, email });
-  const refreshJWT = await createRefreshJWT(_id, email);
-  return { accessJWT, refreshJWT };
-};
+  const accessJWT = await createAccessJWT({ _id, email })
+  const refreshJWT = await createRefreshJWT(_id, email)
+  return { accessJWT, refreshJWT }
+}
 
 export const verifyRefreshJWT = (refreshJWT) => {
-  return jwt.verify(refreshJWT, process.env.JWT_REFRESH_SECRET);
-};
+  return jwt.verify(refreshJWT, process.env.JWT_REFRESH_SECRET)
+}
 
 export const verifyAccessJWT = (accessJWT) => {
   try {
-    return jwt.verify(accessJWT, process.env.JWT_ACCESS_SECRET);
+    return jwt.verify(accessJWT, process.env.JWT_ACCESS_SECRET)
   } catch (error) {
-    return error.message;
+    return error.message
   }
-};
+}

@@ -43,7 +43,7 @@ Router.get('/', isAdminUser, (req, res) => {
 })
 
 //create new user
-Router.post('/', isAdminUser, createAdminUserValidation, async (req, res) => {
+Router.post('/', createAdminUserValidation, async (req, res) => {
   try {
     // encrypt password
     const hashPass = hashPassword(req.body.password)
@@ -167,9 +167,9 @@ Router.patch(
 Router.post('/login', loginUserFormValidation, async (req, res) => {
   try {
     const { email, password } = req.body
-    console.log(req.body)
+    // console.log(req.body)
     const user = await getUserByEmail(email)
-
+    console.log(user)
     if (user?._id && user?.role === 'admin') {
       //check if password is valid
       const isPasswordValid = comparePassword(password, user.password)
@@ -179,10 +179,10 @@ Router.post('/login', loginUserFormValidation, async (req, res) => {
         user.password = undefined
 
         return res.json({
-          user,
           status: 'success',
           message: 'Login Success',
           jwts,
+          user,
         })
       }
     }
