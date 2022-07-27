@@ -23,6 +23,3 @@ All user api endpoint will be followed by `${rootUrl}/api/v1/category`
 | 2. | `/` | POST | Create new category in database |
 | 2. | `/` | PATCH | Update existing category in database |
 | 2. | `/:_id?` | DELETE | delete category from database |
-
-
-edit
